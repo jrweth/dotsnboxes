@@ -63,8 +63,7 @@
             return {
               update: function () {
             		if ($.v.dx !== $.v.lastX || $.v.dy !== $.v.lastY) {
-            		  if ($.v.socket) {
-            		    console.log('here is log');
+            		  if ($.v.socket && $.v.dx && $.v.dy) {
             		    d.getElementById("log").innerText = $.v.dx + ' - ' + $.v.dy;
             		    $.v.socket.emit("move", {'dx': $.v.dx, 'dy': $.v.dy});
             		  }
