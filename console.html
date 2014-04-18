@@ -299,12 +299,16 @@
                       // are we pushing the ball?
 
                       if ($.f.collide($.v.ball, box)) {
+                        
                         $.v.ball.dx = pl.dx;
                         $.v.ball.dy = pl.dy;
-                        
-                        //pl.dx = 0;
-                        //pl.dy = 0;
                         $.f.delta($.v.ball);
+
+                        //slow down the push to 1/2 
+                        pl.dx = pl.dx > 0 ? 0.5 : -0.5;
+                        pl.dy = pl.dy > 0 ? 0.5 : -0.5;
+                        
+                        
                         
                         // ball pushes other boxes out of the way?
                         
