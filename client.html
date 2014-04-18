@@ -30,12 +30,17 @@
       #pad._0{
         background: #6666ff;
       }
-
+        #log {
+        background: #FFFFFF;
+        position: absolute;
+        bottom: 10px;
+     }
     </style>
 	</head>
 	<body>
 	  <div id="bd">
 	    <div id="pad"></div>
+        <div id="log">log</div>
 		</div>
     <script>
 
@@ -59,6 +64,8 @@
               update: function () {
             		if ($.v.dx !== $.v.lastX || $.v.dy !== $.v.lastY) {
             		  if ($.v.socket) {
+            		    console.log('here is log');
+            		    d.getElementById("log").innerText = $.v.dx + ' - ' + $.v.dy;
             		    $.v.socket.emit("move", {'dx': $.v.dx, 'dy': $.v.dy});
             		  }
             		  $.v.lastX = $.v.dx;
