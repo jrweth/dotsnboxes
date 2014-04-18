@@ -249,7 +249,7 @@
                       box.x = pl.x - $.a.boxSize / 2 + $.a.playerSize / 2;
                       box.y = pl.y - $.a.boxSize / 2 + $.a.playerSize / 2;
                       
-                      // have I collided with aomwonw?
+                      // have I collided with anyone?
                     
                       for (var j = 0; j < $.v.box.length; j = j + 1) {
                       
@@ -302,8 +302,8 @@
                         $.v.ball.dx = pl.dx;
                         $.v.ball.dy = pl.dy;
                         
-                        pl.dx = 0;
-                        pl.dy = 0;
+                        //pl.dx = 0;
+                        //pl.dy = 0;
                         $.f.delta($.v.ball);
                         
                         // ball pushes other boxes out of the way?

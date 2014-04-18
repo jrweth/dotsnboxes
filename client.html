@@ -30,17 +30,11 @@
       #pad._0{
         background: #6666ff;
       }
-        #log {
-        background: #FFFFFF;
-        position: absolute;
-        bottom: 10px;
-     }
     </style>
 	</head>
 	<body>
 	  <div id="bd">
 	    <div id="pad"></div>
-        <div id="log">log</div>
 		</div>
     <script>
 
@@ -58,14 +52,14 @@
       
       (function (w, d, a) {
         var $ = w[a.root] = {
-          'a': a, 'd': d, 'w': w, 's': {}, 'v': {'lastX': 0, 'lastY': 0},
+          'a': a, 'd': d, 'w': w, 's': {}, 'v': {'lastX': 0, 'lastY': 0, 'lastMoveTime': Date.now()},
           'f': (function () {
             return {
               update: function () {
             		if ($.v.dx !== $.v.lastX || $.v.dy !== $.v.lastY) {
-            		  if ($.v.socket && $.v.dx && $.v.dy) {
-            		    d.getElementById("log").innerText = $.v.dx + ' - ' + $.v.dy;
+            		  if ($.v.socket && typeof $.v.dx != 'undefined' && typeof $.v.dy != 'undefined') {
             		    $.v.socket.emit("move", {'dx': $.v.dx, 'dy': $.v.dy});
+
             		  }
             		  $.v.lastX = $.v.dx;
             		  $.v.lastY = $.v.dy;
@@ -80,8 +74,9 @@
               },
               getMove: function (e) {
                 if (e.pageX) {
-          		    $.v.dx = ~~((e.pageX - $.s.pad.offsetLeft)/20)-7;
-          		    $.v.dy = ~~((e.pageY - $.s.pad.offsetTop)/20)-7;
+          		    $.v.dx = Math.round((((e.pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
+          		    $.v.dy = Math.round((((e.pageY - $.s.pad.offsetTop)/20)-7)/3.5);
+                    d.getElementById("log").innerText = '(' + e.pageX + ', ' + $.v.dx + ')   (' + e.pageY + ', ' + $.v.dy + ')';
           		  }
               },
               haltMove: function (e) {
