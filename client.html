@@ -116,7 +116,7 @@
                 $.v.socket.emit("join", {});
                 if ('ontouchstart' in $.d.documentElement) {
                   $.s.pad.addEventListener("touchmove", function(e) {
-                    $.f.log("page x raw:" + e.touches[0].pageX + "<br>")
+                    $.f.log("page x raw:" + e.touches[0].pageX + "<br>");
                     e.preventDefault();
                     $.f.log('touchmove');
                     $.f.getMove(e);
