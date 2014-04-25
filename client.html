@@ -63,9 +63,11 @@
 
 
               update: function () {
+                  $.f.log('update function');
             		if ($.v.dx !== $.v.lastX || $.v.dy !== $.v.lastY) {
             		  if ($.v.socket && typeof $.v.dx != 'undefined' && typeof $.v.dy != 'undefined') {
-            		    $.v.socket.emit("move", {'dx': $.v.dx, 'dy': $.v.dy});
+            		      $.f.log('sending move' + $.v.dx + " / " + $.v.dy);
+            		      $.v.socket.emit("move", {'dx': $.v.dx, 'dy': $.v.dy});
             		    $.f.drawCompass();
             		  }
             		  $.v.lastX = $.v.dx;
