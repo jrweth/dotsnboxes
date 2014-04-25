@@ -112,6 +112,7 @@
           		  $.v.dy = 0;
               },
               join: function () {
+                $.f.log('join function');
                 var t = (this.socket.sessionid.charCodeAt(0) % 2);
                 $.s.pad.className = '_' + t;
                 $.v.socket.emit("join", {});
