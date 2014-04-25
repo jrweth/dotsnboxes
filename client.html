@@ -150,6 +150,7 @@
                   $.v.socket.on("connect", $.f.join);
                   $.v.socket.on("disconnect", $.f.leave);
                 }
+                $.f.log('socket finished');
                 $.d.b.appendChild(sock);               
               }
             };
