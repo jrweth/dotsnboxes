@@ -63,7 +63,7 @@
 
 
               update: function () {
-                  $.f.log('update function');
+                    $.f.log($.v.dx + "/" + $.v.lastX + " - " + $.v.dy + "/" + $.v.lastY);
             		if ($.v.dx !== $.v.lastX || $.v.dy !== $.v.lastY) {
             		  if ($.v.socket && typeof $.v.dx != 'undefined' && typeof $.v.dy != 'undefined') {
             		      $.f.log('sending move' + $.v.dx + " / " + $.v.dy);
@@ -90,7 +90,9 @@
                 $.v.socket.emit("leave", {});
               },
               getMove: function (e) {
+                $.f.log("get move");
                 if (e.pageX) {
+                    $.f.log(e.pageX);
           		    $.v.dx = Math.round((((e.pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
           		    $.v.dy = Math.round((((e.pageY - $.s.pad.offsetTop)/20)-7)/3.5);
           		  }
