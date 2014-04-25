@@ -89,22 +89,23 @@
                 $.v.socket.emit("leave", {});
               },
               getMove: function (e) {
-                //var pageX, pageY;
+                var pageX, pageY;
                 $.f.log("get move");
                 if (e.pageX) {
                     $.f.log("found pageX");
                     pageX = e.pageX;
                     pageY = e.pageY;
           		  }
-                else {
-                    $.f.log("found changedTouches");
-                    var event = $.w.event;
-                    
-                    pageX = event.touches[0].pageX;
-                    pageY = event.touches[0].pageY;
+                else if(e.touches) {
+                    $.f.log("e.touches found");
+                    pageX = e.touches[0].pageX;
+                    pageY = e.touches[0].pageY;
                 }
-                //$.v.dx = Math.round((((pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
-                //$.v.dy = Math.round((((pageY - $.s.pad.offsetTop)/20)-7)/3.5);
+                else {
+                    $.f.log('no position data found');
+                }
+                $.v.dx = Math.round((((pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
+                $.v.dy = Math.round((((pageY - $.s.pad.offsetTop)/20)-7)/3.5);
               },
               haltMove: function (e) {
           		  $.v.dx = 0;
@@ -115,8 +116,7 @@
                 $.s.pad.className = '_' + t;
                 $.v.socket.emit("join", {});
                 if ('ontouchstart' in $.d.documentElement) {
-                  $.s.pad.addEventListener("touchmove", function(e) {
-                    $.f.log("page x raw:" + e.touches[0].pageX + "<br>");
+                  $.s.pad.addEventListener("touchmove", function(e) { 
                     e.preventDefault();
                     $.f.log('touchmove');
                     $.f.getMove(e);
@@ -159,10 +159,6 @@
         'root': 'CLIENT',
         'updateInterval': 33
       } ));
-      var testPad = document.getElementById('pad');
-      testPad.addEventListener("touchmove", function(e) {
-        $.f.log("outside page x raw:" + e.touches[0].pageX + "<br>");
-      });
     </script>
 	</body>
 </html>
