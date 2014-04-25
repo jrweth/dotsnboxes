@@ -34,7 +34,7 @@
 	</head>
 	<body>
 	  <div id="bd">
-	    <div id="pad"></div>
+	    <canvas id="pad"></canvas>
 		</div>
     <script>
 
@@ -59,7 +59,7 @@
             		if ($.v.dx !== $.v.lastX || $.v.dy !== $.v.lastY) {
             		  if ($.v.socket && typeof $.v.dx != 'undefined' && typeof $.v.dy != 'undefined') {
             		    $.v.socket.emit("move", {'dx': $.v.dx, 'dy': $.v.dy});
-
+            		    $.f.drawCompass();
             		  }
             		  $.v.lastX = $.v.dx;
             		  $.v.lastY = $.v.dy;
@@ -69,6 +69,14 @@
                 $.f.update();
               	window.requestAnimFrame($.f.animate);
               },
+              drawCompass: function() {
+                  $.s.ctx.clearRect(0,0,300,300);
+                  $.s.ctx.beginPath();
+                  $.s.ctx.fillStyle = "#000";
+                  $.s.ctx.moveTo(150, 75);
+                  $.s.ctx.lineTo(150 + 75 * $.v.dx,75 + 38.5 * $.v.dy);
+                  $.s.ctx.stroke();
+              },
               leave: function () {
                 $.v.socket.emit("leave", {});
               },
@@ -76,7 +84,6 @@
                 if (e.pageX) {
           		    $.v.dx = Math.round((((e.pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
           		    $.v.dy = Math.round((((e.pageY - $.s.pad.offsetTop)/20)-7)/3.5);
-                    d.getElementById("log").innerText = '(' + e.pageX + ', ' + $.v.dx + ')   (' + e.pageY + ', ' + $.v.dy + ')';
           		  }
               },
               haltMove: function (e) {
@@ -111,6 +118,7 @@
               init: function () {
                 $.d.b = $.d.getElementsByTagName('BODY')[0];
                 $.s.pad = $.d.getElementById('pad');
+                $.s.ctx = $.s.pad.getContext("2d");
                 
                 var sock = $.d.createElement('SCRIPT');
                 sock.src = 'http://' + $.w.location.hostname + ':8000/socket.io/socket.io.js'
