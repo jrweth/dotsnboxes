@@ -35,7 +35,7 @@
 	<body>
 	  <div id="bd">
 	    <canvas id="pad"></canvas>
-        <div id="log" style="background-color: white; position:absolute; top: 90%">Log</div>
+        <div id="log" style="background-color: white; position:absolute; top: 90%; display: none">Log</div>
 		</div>
     <script>
 
@@ -150,8 +150,8 @@
                   $.v.socket.on("connect", $.f.join);
                   $.v.socket.on("disconnect", $.f.leave);
                 }
-                $.f.log('socket finished');
-                $.d.b.appendChild(sock);               
+                $.d.b.appendChild(sock);
+                $.f.log('init finished');
               }
             };
           }())
