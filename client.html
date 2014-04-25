@@ -35,6 +35,7 @@
 	<body>
 	  <div id="bd">
 	    <canvas id="pad"></canvas>
+        <div id="log" style="background-color: white; position:absolute; top: 90%">Log</div>
 		</div>
     <script>
 
@@ -55,6 +56,12 @@
           'a': a, 'd': d, 'w': w, 's': {}, 'v': {'lastX': 0, 'lastY': 0, 'lastMoveTime': Date.now()},
           'f': (function () {
             return {
+
+                log: function(message) {
+                    $.s.logDiv.innerHTML = $.v.logNum++ + message + "<br>" + $.s.logDiv.innerHTML.substring(0,200);
+                },
+
+
               update: function () {
             		if ($.v.dx !== $.v.lastX || $.v.dy !== $.v.lastY) {
             		  if ($.v.socket && typeof $.v.dx != 'undefined' && typeof $.v.dy != 'undefined') {
@@ -97,6 +104,7 @@
                 if ('ontouchstart' in $.d.documentElement) {
                   $.s.pad.addEventListener("touchmove", function(e) { 
                     e.preventDefault();
+                    $.f.log('touchmove');
                     $.f.getMove(e);
             		  });
                   $.s.pad.addEventListener("touchend", function(e) { 
@@ -104,6 +112,7 @@
             		  });             
           		  } else {
                   $.s.pad.addEventListener("mousemove", function(e) { 
+                      $.f.log('mousemove');
                     $.f.getMove(e);
             		  });   
                   $.s.pad.addEventListener("mousedown", function(e) { 
@@ -115,8 +124,9 @@
               init: function () {
                 $.d.b = $.d.getElementsByTagName('BODY')[0];
                 $.s.pad = $.d.getElementById('pad');
+                $.s.logDiv = $.d.getElementById('log');
                 $.s.ctx = $.s.pad.getContext("2d");
-                
+                $.v.logNum = 0;
                 var sock = $.d.createElement('SCRIPT');
                 sock.src = 'http://' + $.w.location.hostname + ':8000/socket.io/socket.io.js'
                 
