@@ -143,9 +143,9 @@
                 $.v.logNum = 0;
                 var sock = $.d.createElement('SCRIPT');
                 sock.src = 'http://' + $.w.location.hostname + ':8000/socket.io/socket.io.js'
-                
+                $.f.log("testing log");
                 sock.onload = function () {
-                	$.v.socket = io.connect("http://" + $.w.location.hostname, {port: 8000, transports: ["websocket"]});
+                  $.v.socket = io.connect("http://" + $.w.location.hostname, {port: 8000, transports: ["websocket"]});
                   $.v.socket.on("connect", $.f.join);
                   $.v.socket.on("disconnect", $.f.leave);
                 }
