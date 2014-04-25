@@ -98,8 +98,10 @@
           		  }
                 else {
                     $.f.log("found changedTouches");
-                    pageX = e.touches[0].pageX;
-                    pageY = e.touches[0].pageY;
+                    var event = w.event;
+                    
+                    pageX = event.touches[0].pageX;
+                    pageY = event.touches[0].pageY;
                 }
                 //$.v.dx = Math.round((((pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
                 //$.v.dy = Math.round((((pageY - $.s.pad.offsetTop)/20)-7)/3.5);
