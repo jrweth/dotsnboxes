@@ -96,15 +96,12 @@
                 $.v.socket.emit("join", {});
                 if ('ontouchstart' in $.d.documentElement) {
                   $.s.pad.addEventListener("touchmove", function(e) { 
+                    e.preventDefault();
                     $.f.getMove(e);
             		  });
                   $.s.pad.addEventListener("touchend", function(e) { 
                     $.f.haltMove(e);
-            		  });
-            		  // don't let the body of the page be dragged around
-                  $.d.b.addEventListener("touchmove", function(e) { 
-                    e.preventDefault();
-            		  });               
+            		  });             
           		  } else {
                   $.s.pad.addEventListener("mousemove", function(e) { 
                     $.f.getMove(e);
