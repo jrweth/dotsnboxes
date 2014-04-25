@@ -91,17 +91,15 @@
               getMove: function (e) {
                 //var pageX, pageY;
                 $.f.log("get move");
-                if (false) {
-                //if (e.pageX) {
+                if (e.pageX) {
                     $.f.log("found pageX");
-                   // pageX = e.pageX;
-                    //pageY = e.pageY;
+                    pageX = e.pageX;
+                    pageY = e.pageY;
           		  }
                 else {
                     $.f.log("found changedTouches");
-                    //var event = w.event;
-                    //pageX = event.getX();
-                    //pageY = event.getY();
+                    pageX = e.touches[0].pageX;
+                    pageY = e.touches[0].pageY;
                 }
                 //$.v.dx = Math.round((((pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
                 //$.v.dy = Math.round((((pageY - $.s.pad.offsetTop)/20)-7)/3.5);
