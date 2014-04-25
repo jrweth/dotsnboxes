@@ -89,21 +89,21 @@
                 $.v.socket.emit("leave", {});
               },
               getMove: function (e) {
-                var pageX, pageY;
+                //var pageX, pageY;
                 $.f.log("get move");
                 if (e.pageX) {
                     $.f.log("found pageX");
-                    pageX = e.pageX;
-                    pageY = e.pageY;
+                   // pageX = e.pageX;
+                    //pageY = e.pageY;
           		  }
                 else {
-                    var event = w.event;
                     $f.log("found changedTouches");
-                    pageX = event.getX();
-                    pageY = event.getY();
+                    //var event = w.event;
+                    //pageX = event.getX();
+                    //pageY = event.getY();
                 }
-                $.v.dx = Math.round((((pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
-                $.v.dy = Math.round((((pageY - $.s.pad.offsetTop)/20)-7)/3.5);
+                //$.v.dx = Math.round((((pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
+                //$.v.dy = Math.round((((pageY - $.s.pad.offsetTop)/20)-7)/3.5);
               },
               haltMove: function (e) {
           		  $.v.dx = 0;
