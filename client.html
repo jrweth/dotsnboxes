@@ -99,8 +99,8 @@
                 else {
                     var event = w.event;
                     $f.log("found changedTouches");
-                    pageX = event.touches[0].pageX;
-                    pageY = event.touches[0].pageY;
+                    pageX = event.getX();
+                    pageY = event.getY();
                 }
                 $.v.dx = Math.round((((pageX - $.s.pad.offsetLeft)/20)-7)/3.5);
                 $.v.dy = Math.round((((pageY - $.s.pad.offsetTop)/20)-7)/3.5);
